@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/padding_normal"
+    tools:context="com.warriorminds.firebasekotlin.autenticacion.ActividadAutenticacionCorreo">
+
+    <RelativeLayout
+        android:id="@+id/contenedorIniciarSesion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/etCorreo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/correo_electr_nico"
+            android:inputType="textEmailAddress"/>
+
+        <EditText
+            android:id="@+id/etContraseña"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/etCorreo"
+            android:hint="@string/contrase_a"
+            android:inputType="textPassword"/>
+
+        <Button
+            android:id="@+id/botonIniciarSesion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/etContraseña"
+            android:text="@string/iniciar_sesion"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/contenedorOpcionesSesion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/padding_normal"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvRegistrarse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/text_view_padding"
+            android:text="@string/crear_cuenta"/>
+
+        <TextView
+            android:id="@+id/tvCambiarContraseña"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/text_view_padding"
+            android:text="@string/cambiar_contrase_a"/>
+
+        <TextView
+            android:id="@+id/tvRecuperarContraseña"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/text_view_padding"
+            android:text="@string/recuperar_contrasena"/>
+    </LinearLayout>
+</LinearLayout>
