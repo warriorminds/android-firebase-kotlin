@@ -7,4 +7,8 @@
     <string name="crear_cuenta"><u>Crear Cuenta</u></string>
     <string name="cambiar_contrase_a"><u>Cambiar Contraseña</u></string>
     <string name="recuperar_contrasena"><u>Recuperar Contraseña</u></string>
+    <string name="confirmar_contrasena">Confirmar Contraseña</string>
+    <string name="crear">Crear</string>
+    <string name="hubo_error">Hubo un error</string>
+    <string name="cerrar_sesion">Cerrar Sesión</string>
 </resources>

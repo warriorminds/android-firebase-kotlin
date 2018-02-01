@@ -67,4 +67,18 @@
             android:padding="@dimen/text_view_padding"
             android:text="@string/recuperar_contrasena"/>
     </LinearLayout>
+
+    <Button
+        android:id="@+id/botonCerrarSesion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/cerrar_sesion"
+        android:visibility="gone"/>
+
+    <ProgressBar
+        android:id="@+id/progreso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_gravity="center_horizontal"/>
 </LinearLayout>
