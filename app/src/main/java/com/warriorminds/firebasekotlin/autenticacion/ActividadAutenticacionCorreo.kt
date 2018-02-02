@@ -39,7 +39,14 @@ class ActividadAutenticacionCorreo : AppCompatActivity(), ICrearCuenta {
                 .addOnCompleteListener {
                     progreso.visibility = View.GONE
                     if (it.isSuccessful) {
-                        mostrarInfoUsuario(firebaseAuth.currentUser)
+                        firebaseAuth.currentUser?.let {
+                            if (it.isEmailVerified) {
+                                mostrarInfoUsuario(firebaseAuth.currentUser)
+                                return@addOnCompleteListener
+                            } else {
+                                enviarCorreoVerificacion()
+                            }
+                        }
                     } else {
                         Toast.makeText(this@ActividadAutenticacionCorreo, getString(R.string.hubo_error), Toast.LENGTH_SHORT).show()
                     }
@@ -57,6 +64,20 @@ class ActividadAutenticacionCorreo : AppCompatActivity(), ICrearCuenta {
             contenedorIniciarSesion.visibility = View.VISIBLE
             contenedorOpcionesSesion.visibility = View.VISIBLE
             botonCerrarSesion.visibility = View.GONE
+        }
+    }
+
+    private fun enviarCorreoVerificacion() {
+        firebaseAuth.currentUser?.let {
+            it.sendEmailVerification()
+                    .addOnCompleteListener {
+                        if (it.isSuccessful) {
+                            Toast.makeText(this@ActividadAutenticacionCorreo, getString(R.string.correo_verificacion_enviado), Toast.LENGTH_SHORT).show()
+                            firebaseAuth.signOut()
+                        } else {
+                            Toast.makeText(this@ActividadAutenticacionCorreo, getString(R.string.error_correo_verificacion), Toast.LENGTH_SHORT).show()
+                        }
+                    }
         }
     }
 }
