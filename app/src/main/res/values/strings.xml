@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">FirebaseKotlin</string>
+    <string name="iniciar_sesi_n_con_correo_y_contrase_a">Iniciar Sesión con Correo y Contraseña</string>
+    <string name="correo_electr_nico">Correo Electrónico</string>
+    <string name="contrase_a">Contraseña</string>
+    <string name="iniciar_sesion">Iniciar Sesión</string>
+    <string name="crear_cuenta"><u>Crear Cuenta</u></string>
+    <string name="cambiar_contrase_a"><u>Cambiar Contraseña</u></string>
+    <string name="recuperar_contrasena"><u>Recuperar Contraseña</u></string>
+    <string name="confirmar_contrasena">Confirmar Contraseña</string>
+    <string name="crear">Crear</string>
+    <string name="hubo_error">Hubo un error</string>
+    <string name="cerrar_sesion">Cerrar Sesión</string>
 </resources>
