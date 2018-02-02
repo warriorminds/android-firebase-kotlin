@@ -83,12 +83,16 @@ class ActividadAutenticacionCorreo : AppCompatActivity(), ICrearCuenta {
             contenedorIniciarSesion.visibility = View.GONE
             contenedorOpcionesSesion.visibility = View.GONE
             botonCerrarSesion.visibility = View.VISIBLE
+            tvInfoUsuario.visibility = View.VISIBLE
+            tvInfoUsuario.text = "Correo: ${usuario.email},\nCorreo Verificado: ${usuario.isEmailVerified},\n" +
+                    "Nombre para desplegar: ${usuario.displayName}, \nUID: ${usuario.uid}"
         }
 
         if (usuario == null) {
             contenedorIniciarSesion.visibility = View.VISIBLE
             contenedorOpcionesSesion.visibility = View.VISIBLE
             botonCerrarSesion.visibility = View.GONE
+            tvInfoUsuario.visibility = View.GONE
         }
     }
 
