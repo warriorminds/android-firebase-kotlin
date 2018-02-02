@@ -11,4 +11,6 @@
     <string name="crear">Crear</string>
     <string name="hubo_error">Hubo un error</string>
     <string name="cerrar_sesion">Cerrar Sesión</string>
+    <string name="error_correo_verificacion">Error al enviar correo de verificación</string>
+    <string name="correo_verificacion_enviado">Correo de verificación enviado</string>
 </resources>
