@@ -2,6 +2,7 @@ package com.warriorminds.firebasekotlin.autenticacion
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.text.TextUtils
 import android.view.View
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
@@ -25,6 +26,10 @@ class ActividadAutenticacionCorreo : AppCompatActivity(), ICrearCuenta {
         botonCerrarSesion.setOnClickListener {
             firebaseAuth.signOut()
             mostrarInfoUsuario(null)
+        }
+
+        botonIniciarSesion.setOnClickListener {
+            iniciarSesion()
         }
     }
 
@@ -51,6 +56,26 @@ class ActividadAutenticacionCorreo : AppCompatActivity(), ICrearCuenta {
                         Toast.makeText(this@ActividadAutenticacionCorreo, getString(R.string.hubo_error), Toast.LENGTH_SHORT).show()
                     }
                 }
+    }
+
+    private fun iniciarSesion() {
+        val correo = etCorreo.text.toString()
+        val contraseña = etContrasena.text.toString()
+
+        if (TextUtils.isEmpty(correo) || TextUtils.isEmpty(contraseña)) {
+            Toast.makeText(this, getString(R.string.ingresar_correo_contrasena), Toast.LENGTH_SHORT).show()
+        } else {
+            progreso.visibility = View.VISIBLE
+            firebaseAuth.signInWithEmailAndPassword(correo, contraseña)
+                    .addOnCompleteListener {
+                        progreso.visibility = View.GONE
+                        if (it.isSuccessful) {
+                            mostrarInfoUsuario(firebaseAuth.currentUser)
+                        } else {
+                            Toast.makeText(this@ActividadAutenticacionCorreo, getString(R.string.error_iniciar_sesion), Toast.LENGTH_SHORT).show()
+                        }
+                    }
+        }
     }
 
     private fun mostrarInfoUsuario(usuario: FirebaseUser?) {

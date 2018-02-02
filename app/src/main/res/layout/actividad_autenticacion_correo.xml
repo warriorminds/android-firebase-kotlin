@@ -21,7 +21,7 @@
             android:inputType="textEmailAddress"/>
 
         <EditText
-            android:id="@+id/etContraseña"
+            android:id="@+id/etContrasena"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/etCorreo"
@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_below="@+id/etContraseña"
+            android:layout_below="@+id/etContrasena"
             android:text="@string/iniciar_sesion"/>
     </RelativeLayout>
 
