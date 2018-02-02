@@ -46,7 +46,7 @@ class DialogoCrearCuenta : DialogFragment() {
 
             if (!TextUtils.equals(contraseña, confirmarContraseña)) {
                 inputLayoutContrasena.error = "Las contraseñas no son iguales"
-            } else {
+            } else if (!TextUtils.isEmpty(correo) && !TextUtils.isEmpty(contraseña) && !TextUtils.isEmpty(confirmarContraseña)){
                 inputLayoutContrasena.error = ""
                 listener?.crearCuenta(correo, contraseña)
                 dismiss()
