@@ -10,7 +10,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.warriorminds.firebasekotlin.R
 import kotlinx.android.synthetic.main.actividad_autenticacion_correo.*
 
-class ActividadAutenticacionCorreo : AppCompatActivity(), ICrearCuenta {
+class ActividadAutenticacionCorreo : AppCompatActivity(), ICrearCuenta, IRecuperarContrasena {
 
     private val firebaseAuth = FirebaseAuth.getInstance()
 
@@ -21,6 +21,11 @@ class ActividadAutenticacionCorreo : AppCompatActivity(), ICrearCuenta {
         tvRegistrarse.setOnClickListener {
             val dialogo = DialogoCrearCuenta()
             dialogo.show(supportFragmentManager, "dialogo")
+        }
+
+        tvRecuperarContrasena.setOnClickListener {
+            val dialogo = DialogoRecuperarContrasena()
+            dialogo.show(supportFragmentManager, "dialogoRecuperar")
         }
 
         botonCerrarSesion.setOnClickListener {
@@ -76,6 +81,19 @@ class ActividadAutenticacionCorreo : AppCompatActivity(), ICrearCuenta {
                         }
                     }
         }
+    }
+
+    override fun recuperarContrasena(correo: String) {
+        progreso.visibility = View.VISIBLE
+        firebaseAuth.sendPasswordResetEmail(correo)
+                .addOnCompleteListener {
+                    progreso.visibility = View.GONE
+                    if (it.isSuccessful) {
+                        Toast.makeText(this@ActividadAutenticacionCorreo, getString(R.string.correo_recuperar_contrasena_enviado), Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(this@ActividadAutenticacionCorreo, getString(R.string.error_enviar_correo), Toast.LENGTH_SHORT).show()
+                    }
+                }
     }
 
     private fun mostrarInfoUsuario(usuario: FirebaseUser?) {

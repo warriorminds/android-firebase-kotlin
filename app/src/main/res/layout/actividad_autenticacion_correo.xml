@@ -61,7 +61,7 @@
             android:text="@string/cambiar_contrase_a"/>
 
         <TextView
-            android:id="@+id/tvRecuperarContraseña"
+            android:id="@+id/tvRecuperarContrasena"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/text_view_padding"
