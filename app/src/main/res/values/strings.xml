@@ -17,4 +17,8 @@
     <string name="error_iniciar_sesion">Error al iniciar sesión.</string>
     <string name="correo_recuperar_contrasena_enviado">Se ha enviado un correo para recuperar su contraseña.</string>
     <string name="error_enviar_correo">Hubo un error al enviar el correo.</string>
+    <string name="nueva_contrasena">Nueva Contraseña</string>
+    <string name="contrasena_cambiada">Contraseña cambiada.</string>
+    <string name="error_cambiar_contrasena">Hubo un error al cambiar su contraseña.</string>
+    <string name="error_reautenticacion">Error al reautenticar usuario.</string>
 </resources>
