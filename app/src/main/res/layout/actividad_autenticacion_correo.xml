@@ -54,13 +54,6 @@
             android:text="@string/crear_cuenta"/>
 
         <TextView
-            android:id="@+id/tvCambiarContraseña"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/text_view_padding"
-            android:text="@string/cambiar_contrase_a"/>
-
-        <TextView
             android:id="@+id/tvRecuperarContrasena"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -68,18 +61,32 @@
             android:text="@string/recuperar_contrasena"/>
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/tvInfoUsuario"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"/>
-
-    <Button
-        android:id="@+id/botonCerrarSesion"
+    <LinearLayout
+        android:id="@+id/contenedorOpcionesUsuario"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/cerrar_sesion"
-        android:visibility="gone"/>
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/tvInfoUsuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/botonCerrarSesion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/cerrar_sesion"/>
+
+        <TextView
+            android:id="@+id/tvCambiarContrasena"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:padding="@dimen/text_view_padding"
+            android:text="@string/cambiar_contrase_a"/>
+    </LinearLayout>
 
     <ProgressBar
         android:id="@+id/progreso"

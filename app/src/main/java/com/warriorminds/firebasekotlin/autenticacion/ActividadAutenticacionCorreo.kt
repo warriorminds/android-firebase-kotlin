@@ -5,12 +5,13 @@ import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
 import android.view.View
 import android.widget.Toast
+import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.warriorminds.firebasekotlin.R
 import kotlinx.android.synthetic.main.actividad_autenticacion_correo.*
 
-class ActividadAutenticacionCorreo : AppCompatActivity(), ICrearCuenta, IRecuperarContrasena {
+class ActividadAutenticacionCorreo : AppCompatActivity(), ICrearCuenta, IRecuperarContrasena, ICambiarContrasena {
 
     private val firebaseAuth = FirebaseAuth.getInstance()
 
@@ -26,6 +27,11 @@ class ActividadAutenticacionCorreo : AppCompatActivity(), ICrearCuenta, IRecuper
         tvRecuperarContrasena.setOnClickListener {
             val dialogo = DialogoRecuperarContrasena()
             dialogo.show(supportFragmentManager, "dialogoRecuperar")
+        }
+
+        tvCambiarContrasena.setOnClickListener {
+            val dialogo = DialogoCambiarContrasena()
+            dialogo.show(supportFragmentManager, "dialogoCambiar")
         }
 
         botonCerrarSesion.setOnClickListener {
@@ -63,6 +69,44 @@ class ActividadAutenticacionCorreo : AppCompatActivity(), ICrearCuenta, IRecuper
                 }
     }
 
+
+    override fun recuperarContrasena(correo: String) {
+        progreso.visibility = View.VISIBLE
+        firebaseAuth.sendPasswordResetEmail(correo)
+                .addOnCompleteListener {
+                    progreso.visibility = View.GONE
+                    if (it.isSuccessful) {
+                        Toast.makeText(this@ActividadAutenticacionCorreo, getString(R.string.correo_recuperar_contrasena_enviado), Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(this@ActividadAutenticacionCorreo, getString(R.string.error_enviar_correo), Toast.LENGTH_SHORT).show()
+                    }
+                }
+    }
+
+    override fun cambiarContrasena(contrasenaActual: String, nuevaContrasena: String) {
+        progreso.visibility = View.VISIBLE
+        firebaseAuth.currentUser?.let {
+            val credencial = EmailAuthProvider.getCredential(it.email!!, contrasenaActual)
+            it.reauthenticate(credencial)
+                    .addOnCompleteListener {
+                        if (it.isSuccessful) {
+                            firebaseAuth.currentUser?.updatePassword(nuevaContrasena)
+                                    ?.addOnCompleteListener {
+                                        progreso.visibility = View.GONE
+                                        if (it.isSuccessful) {
+                                            Toast.makeText(this@ActividadAutenticacionCorreo, getString(R.string.contrasena_cambiada), Toast.LENGTH_SHORT).show()
+                                        } else {
+                                            Toast.makeText(this@ActividadAutenticacionCorreo, getString(R.string.error_cambiar_contrasena), Toast.LENGTH_SHORT).show()
+                                        }
+                                    }
+                        } else {
+                            progreso.visibility = View.GONE
+                            Toast.makeText(this@ActividadAutenticacionCorreo, getString(R.string.error_reautenticacion), Toast.LENGTH_SHORT).show()
+                        }
+                    }
+        }
+    }
+
     private fun iniciarSesion() {
         val correo = etCorreo.text.toString()
         val contraseña = etContrasena.text.toString()
@@ -83,25 +127,11 @@ class ActividadAutenticacionCorreo : AppCompatActivity(), ICrearCuenta, IRecuper
         }
     }
 
-    override fun recuperarContrasena(correo: String) {
-        progreso.visibility = View.VISIBLE
-        firebaseAuth.sendPasswordResetEmail(correo)
-                .addOnCompleteListener {
-                    progreso.visibility = View.GONE
-                    if (it.isSuccessful) {
-                        Toast.makeText(this@ActividadAutenticacionCorreo, getString(R.string.correo_recuperar_contrasena_enviado), Toast.LENGTH_SHORT).show()
-                    } else {
-                        Toast.makeText(this@ActividadAutenticacionCorreo, getString(R.string.error_enviar_correo), Toast.LENGTH_SHORT).show()
-                    }
-                }
-    }
-
     private fun mostrarInfoUsuario(usuario: FirebaseUser?) {
         usuario?.let {
             contenedorIniciarSesion.visibility = View.GONE
             contenedorOpcionesSesion.visibility = View.GONE
-            botonCerrarSesion.visibility = View.VISIBLE
-            tvInfoUsuario.visibility = View.VISIBLE
+            contenedorOpcionesUsuario.visibility = View.VISIBLE
             tvInfoUsuario.text = "Correo: ${usuario.email},\nCorreo Verificado: ${usuario.isEmailVerified},\n" +
                     "Nombre para desplegar: ${usuario.displayName}, \nUID: ${usuario.uid}"
         }
@@ -109,8 +139,7 @@ class ActividadAutenticacionCorreo : AppCompatActivity(), ICrearCuenta, IRecuper
         if (usuario == null) {
             contenedorIniciarSesion.visibility = View.VISIBLE
             contenedorOpcionesSesion.visibility = View.VISIBLE
-            botonCerrarSesion.visibility = View.GONE
-            tvInfoUsuario.visibility = View.GONE
+            contenedorOpcionesUsuario.visibility = View.GONE
         }
     }
 
