@@ -15,4 +15,6 @@
     <string name="correo_verificacion_enviado">Correo de verificación enviado</string>
     <string name="ingresar_correo_contrasena">Ingresar correo y contraseña.</string>
     <string name="error_iniciar_sesion">Error al iniciar sesión.</string>
+    <string name="correo_recuperar_contrasena_enviado">Se ha enviado un correo para recuperar su contraseña.</string>
+    <string name="error_enviar_correo">Hubo un error al enviar el correo.</string>
 </resources>
