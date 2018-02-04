@@ -1,3 +1,24 @@
 <resources>
     <string name="app_name">FirebaseKotlin</string>
+    <string name="iniciar_sesi_n_con_correo_y_contrase_a">Iniciar Sesión con Correo y Contraseña</string>
+    <string name="correo_electr_nico">Correo Electrónico</string>
+    <string name="contrase_a">Contraseña</string>
+    <string name="iniciar_sesion">Iniciar Sesión</string>
+    <string name="crear_cuenta"><u>Crear Cuenta</u></string>
+    <string name="cambiar_contrase_a"><u>Cambiar Contraseña</u></string>
+    <string name="recuperar_contrasena"><u>Recuperar Contraseña</u></string>
+    <string name="confirmar_contrasena">Confirmar Contraseña</string>
+    <string name="crear">Crear</string>
+    <string name="hubo_error">Hubo un error</string>
+    <string name="cerrar_sesion">Cerrar Sesión</string>
+    <string name="error_correo_verificacion">Error al enviar correo de verificación</string>
+    <string name="correo_verificacion_enviado">Correo de verificación enviado</string>
+    <string name="ingresar_correo_contrasena">Ingresar correo y contraseña.</string>
+    <string name="error_iniciar_sesion">Error al iniciar sesión.</string>
+    <string name="correo_recuperar_contrasena_enviado">Se ha enviado un correo para recuperar su contraseña.</string>
+    <string name="error_enviar_correo">Hubo un error al enviar el correo.</string>
+    <string name="nueva_contrasena">Nueva Contraseña</string>
+    <string name="contrasena_cambiada">Contraseña cambiada.</string>
+    <string name="error_cambiar_contrasena">Hubo un error al cambiar su contraseña.</string>
+    <string name="error_reautenticacion">Error al reautenticar usuario.</string>
 </resources>
