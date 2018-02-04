@@ -18,6 +18,8 @@
         </activity>
         <activity android:name=".autenticacion.ActividadAutenticacionCorreo">
         </activity>
+        <activity android:name=".autenticacion.ActividadIniciarSesionProveedores">
+        </activity>
     </application>
 
 </manifest>
