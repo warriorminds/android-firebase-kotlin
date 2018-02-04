@@ -25,4 +25,7 @@
     <string name="default_cliente_web_id">757257252338-t3fjrvlpoun42u8ncopv09inmr899ng5.apps.googleusercontent.com</string>
     <string name="error_iniciar_sesion_google">Hubo un error al iniciar sesión con Google.</string>
     <string name="error_inicio_sesion_google">Error al iniciar sesión con Google.</string>
+    <string name="facebook_app_id">1610618632319643</string>
+    <string name="inicio_sesion_fb_cancelado">Se ha cancelado el de sesión con Facebook.</string>
+    <string name="error_inicio_sesion_fb">Error al iniciar sesión con Facebook.</string>
 </resources>
