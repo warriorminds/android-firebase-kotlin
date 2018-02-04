@@ -10,7 +10,8 @@
     <LinearLayout
         android:id="@+id/contenedorBotones"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <com.google.android.gms.common.SignInButton
             android:id="@+id/botonInicioSesionGoogle"
@@ -18,4 +19,24 @@
             android:layout_height="wrap_content"/>
 
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/contenedorSesionIniciada"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <Button
+            android:id="@+id/botonCerrarSesionProveedores"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/cerrar_sesion"/>
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progresoProveedores"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
 </LinearLayout>
