@@ -13,4 +13,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/iniciar_sesi_n_con_correo_y_contrase_a"/>
+
+    <Button
+        android:id="@+id/botonIniciarSesionProveedores"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/opciones_iniciar_sesion"/>
 </LinearLayout>

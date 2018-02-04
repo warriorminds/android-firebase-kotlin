@@ -4,6 +4,7 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.warriorminds.firebasekotlin.autenticacion.ActividadAutenticacionCorreo
+import com.warriorminds.firebasekotlin.autenticacion.ActividadIniciarSesionProveedores
 import kotlinx.android.synthetic.main.actividad_principal.*
 
 class ActividadPrincipal : AppCompatActivity() {
@@ -14,6 +15,10 @@ class ActividadPrincipal : AppCompatActivity() {
 
         botonAutenticarCorreo.setOnClickListener {
             iniciarActividad(ActividadAutenticacionCorreo::class.java)
+        }
+
+        botonIniciarSesionProveedores.setOnClickListener {
+            iniciarActividad(ActividadIniciarSesionProveedores::class.java)
         }
     }
 
