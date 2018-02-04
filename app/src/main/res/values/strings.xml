@@ -28,4 +28,5 @@
     <string name="facebook_app_id">1610618632319643</string>
     <string name="inicio_sesion_fb_cancelado">Se ha cancelado el de sesión con Facebook.</string>
     <string name="error_inicio_sesion_fb">Error al iniciar sesión con Facebook.</string>
+    <string name="error_facebook_firebase">Hubo un error al iniciar sesión con Facebook en Firebase.</string>
 </resources>

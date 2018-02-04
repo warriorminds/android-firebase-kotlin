@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.Toast
 import com.facebook.*
+import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
 import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -13,6 +14,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
+import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.warriorminds.firebasekotlin.R
@@ -80,7 +82,18 @@ class ActividadIniciarSesionProveedores : AppCompatActivity(), GoogleApiClient.O
     }
 
     private fun iniciarSesionConFirebase(tokenAcceso: AccessToken?) {
-
+        val credencial = FacebookAuthProvider.getCredential(tokenAcceso?.token!!)
+        progresoProveedores.visibility = View.VISIBLE
+        firebaseAuth.signInWithCredential(credencial)
+                .addOnCompleteListener {
+                    progresoProveedores.visibility = View.GONE
+                    if (it.isSuccessful) {
+                        actualizarInterfaz()
+                    } else {
+                        LoginManager.getInstance().logOut()
+                        Toast.makeText(this@ActividadIniciarSesionProveedores, getString(R.string.error_facebook_firebase), Toast.LENGTH_SHORT).show()
+                    }
+                }
 
     }
 
@@ -127,6 +140,7 @@ class ActividadIniciarSesionProveedores : AppCompatActivity(), GoogleApiClient.O
 
     private fun cerrarSesion() {
         firebaseAuth.signOut()
+        LoginManager.getInstance().logOut()
         actualizarInterfaz()
     }
 }
