@@ -18,6 +18,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
+        <com.facebook.login.widget.LoginButton
+            android:id="@+id/botonInicioSesionFacebook"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
     </LinearLayout>
 
     <LinearLayout

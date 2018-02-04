@@ -1,11 +1,12 @@
 package com.warriorminds.firebasekotlin.autenticacion
 
 import android.content.Intent
-import android.opengl.Visibility
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.Toast
+import com.facebook.*
+import com.facebook.login.LoginResult
 import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -22,9 +23,11 @@ class ActividadIniciarSesionProveedores : AppCompatActivity(), GoogleApiClient.O
     private val CODIGO_INICIAR_SESION_GOOGLE = 2001
     private val firebaseAuth : FirebaseAuth = FirebaseAuth.getInstance()
     private var clienteGoogleApi : GoogleApiClient? = null
+    private val manejadorLlamadas : CallbackManager = CallbackManager.Factory.create()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        FacebookSdk.sdkInitialize(applicationContext)
         setContentView(R.layout.actividad_iniciar_sesion_proveedores)
         botonInicioSesionGoogle.setOnClickListener {
             iniciarSesionGoogle()
@@ -35,6 +38,7 @@ class ActividadIniciarSesionProveedores : AppCompatActivity(), GoogleApiClient.O
         }
 
         inicializarGoogle()
+        inicializarFacebook()
     }
 
     override fun onStart() {
@@ -44,6 +48,7 @@ class ActividadIniciarSesionProveedores : AppCompatActivity(), GoogleApiClient.O
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        manejadorLlamadas.onActivityResult(requestCode, resultCode, data)
         if (requestCode == CODIGO_INICIAR_SESION_GOOGLE) {
             val resultado = GoogleSignIn.getSignedInAccountFromIntent(data)
             if (resultado.exception == null && resultado.result != null) {
@@ -74,6 +79,11 @@ class ActividadIniciarSesionProveedores : AppCompatActivity(), GoogleApiClient.O
         }
     }
 
+    private fun iniciarSesionConFirebase(tokenAcceso: AccessToken?) {
+
+
+    }
+
     private fun inicializarGoogle() {
         val opcionesInicioSesionGoogle = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_cliente_web_id))
@@ -85,6 +95,23 @@ class ActividadIniciarSesionProveedores : AppCompatActivity(), GoogleApiClient.O
                 .enableAutoManage(this, this)
                 .addApi(Auth.GOOGLE_SIGN_IN_API, opcionesInicioSesionGoogle)
                 .build()
+    }
+
+    private fun inicializarFacebook() {
+        botonInicioSesionFacebook.setReadPermissions("email", "public_profile")
+        botonInicioSesionFacebook.registerCallback(manejadorLlamadas, object : FacebookCallback<LoginResult> {
+            override fun onSuccess(result: LoginResult?) {
+                iniciarSesionConFirebase(result?.accessToken)
+            }
+
+            override fun onCancel() {
+                Toast.makeText(this@ActividadIniciarSesionProveedores, getString(R.string.inicio_sesion_fb_cancelado), Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onError(error: FacebookException?) {
+                Toast.makeText(this@ActividadIniciarSesionProveedores, getString(R.string.error_inicio_sesion_fb), Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
     private fun iniciarSesionGoogle() {
