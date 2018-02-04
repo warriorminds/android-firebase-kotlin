@@ -21,4 +21,7 @@
     <string name="contrasena_cambiada">Contraseña cambiada.</string>
     <string name="error_cambiar_contrasena">Hubo un error al cambiar su contraseña.</string>
     <string name="error_reautenticacion">Error al reautenticar usuario.</string>
+    <string name="opciones_iniciar_sesion">Otras Opciones para Iniciar Sesión</string>
+    <string name="default_cliente_web_id">757257252338-t3fjrvlpoun42u8ncopv09inmr899ng5.apps.googleusercontent.com</string>
+    <string name="error_iniciar_sesion_google">Hubo un error al iniciar sesión con Google.</string>
 </resources>
