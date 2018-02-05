@@ -14,9 +14,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
-import com.google.firebase.auth.FacebookAuthProvider
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.auth.*
+import com.twitter.sdk.android.core.*
+import com.twitter.sdk.android.core.identity.TwitterLoginButton
 import com.warriorminds.firebasekotlin.R
 import kotlinx.android.synthetic.main.actividad_iniciar_sesion_proveedores.*
 
@@ -41,6 +41,7 @@ class ActividadIniciarSesionProveedores : AppCompatActivity(), GoogleApiClient.O
 
         inicializarGoogle()
         inicializarFacebook()
+        inicializarTwitter()
     }
 
     override fun onStart() {
@@ -51,6 +52,8 @@ class ActividadIniciarSesionProveedores : AppCompatActivity(), GoogleApiClient.O
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         manejadorLlamadas.onActivityResult(requestCode, resultCode, data)
+        botonInicioSesionTwitter.onActivityResult(requestCode, resultCode, data)
+
         if (requestCode == CODIGO_INICIAR_SESION_GOOGLE) {
             val resultado = GoogleSignIn.getSignedInAccountFromIntent(data)
             if (resultado.exception == null && resultado.result != null) {
@@ -97,6 +100,10 @@ class ActividadIniciarSesionProveedores : AppCompatActivity(), GoogleApiClient.O
 
     }
 
+    private fun iniciarSesionConFirebase(sesionTwitter: TwitterSession?) {
+        
+    }
+
     private fun inicializarGoogle() {
         val opcionesInicioSesionGoogle = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_cliente_web_id))
@@ -127,6 +134,24 @@ class ActividadIniciarSesionProveedores : AppCompatActivity(), GoogleApiClient.O
         })
     }
 
+    private fun inicializarTwitter() {
+        val configuracion = TwitterConfig.Builder(this)
+                .twitterAuthConfig(TwitterAuthConfig("lR8Ec1njnXADIdVrduJH1hX2i", "roPMbuCsPlXCjseQZKDhuXWbmceIEi7yjm53gF4ZEgPHa39kq2"))
+                .debug(true)
+                .build()
+        Twitter.initialize(configuracion)
+
+        botonInicioSesionTwitter.callback = object : Callback<TwitterSession>() {
+            override fun failure(exception: TwitterException?) {
+                Toast.makeText(this@ActividadIniciarSesionProveedores, getString(R.string.error_sesion_twitter), Toast.LENGTH_SHORT).show()
+            }
+
+            override fun success(result: Result<TwitterSession>?) {
+                iniciarSesionConFirebase(result?.data)
+            }
+        }
+    }
+
     private fun iniciarSesionGoogle() {
         val intent = Auth.GoogleSignInApi.getSignInIntent(clienteGoogleApi)
         startActivityForResult(intent, CODIGO_INICIAR_SESION_GOOGLE)
@@ -141,6 +166,7 @@ class ActividadIniciarSesionProveedores : AppCompatActivity(), GoogleApiClient.O
     private fun cerrarSesion() {
         firebaseAuth.signOut()
         LoginManager.getInstance().logOut()
+        TwitterCore.getInstance().sessionManager.clearActiveSession()
         actualizarInterfaz()
     }
 }

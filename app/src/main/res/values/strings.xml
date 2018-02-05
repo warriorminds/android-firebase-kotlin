@@ -29,4 +29,7 @@
     <string name="inicio_sesion_fb_cancelado">Se ha cancelado el de sesión con Facebook.</string>
     <string name="error_inicio_sesion_fb">Error al iniciar sesión con Facebook.</string>
     <string name="error_facebook_firebase">Hubo un error al iniciar sesión con Facebook en Firebase.</string>
+    <string name="com.twitter.sdk.android.CONSUMER_KEY">lR8Ec1njnXADIdVrduJH1hX2i</string>
+    <string name="com.twitter.sdk.android.CONSUMER_SECRET">roPMbuCsPlXCjseQZKDhuXWbmceIEi7yjm53gF4ZEgPHa39kq2</string>
+    <string name="error_sesion_twitter">Hubo un error al iniciar sesión con Twitter</string>
 </resources>
