@@ -101,7 +101,17 @@ class ActividadIniciarSesionProveedores : AppCompatActivity(), GoogleApiClient.O
     }
 
     private fun iniciarSesionConFirebase(sesionTwitter: TwitterSession?) {
-        
+        val credencial = TwitterAuthProvider.getCredential(sesionTwitter?.authToken!!.token, sesionTwitter.authToken.secret)
+        progresoProveedores.visibility = View.VISIBLE
+        firebaseAuth.signInWithCredential(credencial)
+                .addOnCompleteListener {
+                    progresoProveedores.visibility = View.GONE
+                    if (it.isSuccessful) {
+                        actualizarInterfaz()
+                    } else {
+                        Toast.makeText(this@ActividadIniciarSesionProveedores, "Error al iniciar sesión con Twitter en Firebase.", Toast.LENGTH_SHORT).show()
+                    }
+                }
     }
 
     private fun inicializarGoogle() {
