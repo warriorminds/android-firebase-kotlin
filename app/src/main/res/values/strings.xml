@@ -32,4 +32,12 @@
     <string name="com.twitter.sdk.android.CONSUMER_KEY">lR8Ec1njnXADIdVrduJH1hX2i</string>
     <string name="com.twitter.sdk.android.CONSUMER_SECRET">roPMbuCsPlXCjseQZKDhuXWbmceIEi7yjm53gF4ZEgPHa39kq2</string>
     <string name="error_sesion_twitter">Hubo un error al iniciar sesión con Twitter</string>
+    <string name="numero_telefonico">Número Telefónico</string>
+    <string name="enviar_codigo">Enviar Código</string>
+    <string name="codigo_verificacion">Código de Verificación</string>
+    <string name="iniciar_sesion_telefono">Iniciar Sesión con Número Telefónico</string>
+    <string name="codigo_verificacion_enviado">Se ha enviado el código de verificación.</string>
+    <string name="numero_incorrecto">Número telefónico incorrecto.</string>
+    <string name="verificaciones_excedidas">Número de verificaciones excedidas.</string>
+    <string name="error_verificacion">Hubo un error en la verificación.</string>
 </resources>
