@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/padding_normal"
+    tools:context="com.warriorminds.firebasekotlin.autenticacion.ActividadSesionTelefono">
+
+    <LinearLayout
+        android:id="@+id/contenedorCapturaDatos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/layoutTelefono"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/etNumeroTelefonico"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/numero_telefonico"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:id="@+id/botonEnviarCodigo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/enviar_codigo"/>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/layoutCodigoVerificacion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/etCodigoVerificacion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/codigo_verificacion"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:id="@+id/botonCodigoVerificacion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/iniciar_sesion_telefono"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/botonCerrarSesionTelefono"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/cerrar_sesion"
+        android:visibility="gone"/>
+
+</LinearLayout>
