@@ -32,6 +32,8 @@
 
         <activity android:name=".autenticacion.ActividadSesionTelefono">
         </activity>
+        <activity android:name=".autenticacion.ActividadAutenticacionAnonima">
+        </activity>
     </application>
 
 </manifest>
