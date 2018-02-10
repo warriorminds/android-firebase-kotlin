@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/padding_normal"
+    android:orientation="vertical"
+    tools:context="com.warriorminds.firebasekotlin.analytics.ActividadAnalytics">
+
+    <Button
+        android:id="@+id/botonEventoCompra"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/evento_compra"/>
+
+    <Button
+        android:id="@+id/botonEventoPropio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/evento_propio"/>
+</LinearLayout>

@@ -44,4 +44,7 @@
     <string name="sesion_anonima_iniciada">Sesión anónima iniciada.</string>
     <string name="error_sesion_anonima">Hubo un error al iniciar sesión anónima.</string>
     <string name="autenticacion_anonima_enlace_cuentas">Autenticación Anónima y Enlace de Cuentas</string>
+    <string name="evento_compra">Enviar Evento de Compra</string>
+    <string name="analytics">Analytics</string>
+    <string name="evento_propio">Evento Propio</string>
 </resources>

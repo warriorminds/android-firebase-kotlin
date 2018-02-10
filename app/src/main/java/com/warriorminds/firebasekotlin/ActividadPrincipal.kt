@@ -3,6 +3,7 @@ package com.warriorminds.firebasekotlin
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import com.warriorminds.firebasekotlin.analytics.ActividadAnalytics
 import com.warriorminds.firebasekotlin.autenticacion.ActividadAutenticacionAnonima
 import com.warriorminds.firebasekotlin.autenticacion.ActividadAutenticacionCorreo
 import com.warriorminds.firebasekotlin.autenticacion.ActividadIniciarSesionProveedores
@@ -29,6 +30,10 @@ class ActividadPrincipal : AppCompatActivity() {
 
         botonIniciarAutenticacionAnonima.setOnClickListener {
             iniciarActividad(ActividadAutenticacionAnonima::class.java)
+        }
+
+        botonAnalytics.setOnClickListener {
+            iniciarActividad(ActividadAnalytics::class.java)
         }
     }
 

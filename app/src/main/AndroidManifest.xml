@@ -34,6 +34,8 @@
         </activity>
         <activity android:name=".autenticacion.ActividadAutenticacionAnonima">
         </activity>
+        <activity android:name=".analytics.ActividadAnalytics">
+        </activity>
     </application>
 
 </manifest>
