@@ -23,6 +23,10 @@ class ActividadAnalytics : AppCompatActivity() {
         botonEventoPropio.setOnClickListener {
             enviarEventoPropio()
         }
+
+        botonGrupo.setOnClickListener {
+            enviarPropiedadUsuario()
+        }
     }
 
     private fun enviarEventoCompra() {
@@ -39,5 +43,11 @@ class ActividadAnalytics : AppCompatActivity() {
         informacion.putInt(FirebaseAnalytics.Param.VALUE, random.nextInt(1000))
         informacion.putString(FirebaseAnalytics.Param.ITEM_CATEGORY, "prueba")
         analytics?.logEvent("analytics_prueba", informacion)
+    }
+
+    private fun enviarPropiedadUsuario() {
+        val grupos = arrayOf("Beatles", "Pink Floyd", "Led Zeppelin")
+        val random = Random(System.currentTimeMillis())
+        analytics?.setUserProperty("grupo_musical_favorito", grupos[random.nextInt(3)])
     }
 }
