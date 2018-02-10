@@ -31,4 +31,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/autenticacion_anonima_enlace_cuentas"/>
+
+    <Button
+        android:id="@+id/botonAnalytics"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/analytics"/>
 </LinearLayout>
