@@ -47,4 +47,5 @@
     <string name="evento_compra">Enviar Evento de Compra</string>
     <string name="analytics">Analytics</string>
     <string name="evento_propio">Evento Propio</string>
+    <string name="enviar_grupo">Enviar Grupo</string>
 </resources>
