@@ -3,6 +3,7 @@ package com.warriorminds.firebasekotlin
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.warriorminds.firebasekotlin.analytics.ActividadAnalytics
 import com.warriorminds.firebasekotlin.autenticacion.ActividadAutenticacionAnonima
 import com.warriorminds.firebasekotlin.autenticacion.ActividadAutenticacionCorreo
@@ -12,9 +13,17 @@ import kotlinx.android.synthetic.main.actividad_principal.*
 
 class ActividadPrincipal : AppCompatActivity() {
 
+    private val TAG = ActividadPrincipal::class.java.simpleName
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.actividad_principal)
+
+        intent.extras?.let {
+            for (llave in intent.extras.keySet()) {
+                Log.d(TAG, "Llave: $llave, Valor: ${intent.extras[llave]}")
+            }
+        }
 
         botonAutenticarCorreo.setOnClickListener {
             iniciarActividad(ActividadAutenticacionCorreo::class.java)
