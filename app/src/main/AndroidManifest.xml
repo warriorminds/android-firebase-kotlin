@@ -39,12 +39,12 @@
 
         <service android:name=".notificaciones.ServicioDeToken">
             <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
             </intent-filter>
         </service>
         <service android:name=".notificaciones.ServicioDeMensajes">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
             </intent-filter>
         </service>
         <service android:name=".notificaciones.ServicioTrabajo">
@@ -55,15 +55,16 @@
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@drawable/ic_notification" />
-
+            android:resource="@drawable/ic_notification"/>
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
-            android:resource="@color/colorAccent" />
-
+            android:resource="@color/colorAccent"/>
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="@string/notificacion_id_default"/>
+
+        <activity android:name=".notificaciones.ActividadNotificaciones">
+        </activity>
     </application>
 
 </manifest>
