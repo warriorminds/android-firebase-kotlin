@@ -48,4 +48,9 @@
     <string name="analytics">Analytics</string>
     <string name="evento_propio">Evento Propio</string>
     <string name="enviar_grupo">Enviar Grupo</string>
+    <string name="notificacion_id_default">canal_notificacion_id</string>
+    <string name="notificaciones_noticias">Noticias</string>
+    <string name="notificacion_deportes">Deportes</string>
+    <string name="notificacion_entretenimiento">Entretenimiento</string>
+    <string name="opciones_notificaciones">Opciones de Notificaciones</string>
 </resources>
