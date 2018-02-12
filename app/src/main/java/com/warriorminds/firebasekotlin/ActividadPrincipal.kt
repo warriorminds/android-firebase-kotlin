@@ -9,6 +9,7 @@ import com.warriorminds.firebasekotlin.autenticacion.ActividadAutenticacionAnoni
 import com.warriorminds.firebasekotlin.autenticacion.ActividadAutenticacionCorreo
 import com.warriorminds.firebasekotlin.autenticacion.ActividadIniciarSesionProveedores
 import com.warriorminds.firebasekotlin.autenticacion.ActividadSesionTelefono
+import com.warriorminds.firebasekotlin.notificaciones.ActividadNotificaciones
 import kotlinx.android.synthetic.main.actividad_principal.*
 
 class ActividadPrincipal : AppCompatActivity() {
@@ -43,6 +44,10 @@ class ActividadPrincipal : AppCompatActivity() {
 
         botonAnalytics.setOnClickListener {
             iniciarActividad(ActividadAnalytics::class.java)
+        }
+
+        botonNotificaciones.setOnClickListener {
+            iniciarActividad(ActividadNotificaciones::class.java)
         }
     }
 
