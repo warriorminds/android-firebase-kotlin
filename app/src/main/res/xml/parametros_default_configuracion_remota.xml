@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<defaultsMap>
+    <entry>
+        <key>mostrar_pantalla</key>
+        <value>false</value>
+    </entry>
+    <entry>
+        <key>titulo_pantalla</key>
+        <value>WarriorMinds</value>
+    </entry>
+    <entry>
+        <key>texto_pantalla</key>
+        <value>
+            Visita WarriorMinds! Aquí podrás aprender a desarrollar aplicaciones para Android,
+            buenas prácticas de software, arquitecturas para Android, patrones de diseño y
+            librerías utilizadas en el desarrolo de apps como Firebase, Retrofit, RxJava, etcétera.
+        </value>
+    </entry>
+</defaultsMap>
