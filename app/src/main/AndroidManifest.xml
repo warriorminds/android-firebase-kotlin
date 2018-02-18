@@ -65,6 +65,8 @@
 
         <activity android:name=".notificaciones.ActividadNotificaciones">
         </activity>
+        <activity android:name=".configuracion_remota.ActividadConfiguracionRemota">
+        </activity>
     </application>
 
 </manifest>

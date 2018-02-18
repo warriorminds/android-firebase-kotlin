@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/padding_normal"
+    tools:context="com.warriorminds.firebasekotlin.configuracion_remota.ActividadConfiguracionRemota">
+
+    <TextView
+        android:id="@+id/tvTitulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"
+        android:textSize="@dimen/titulo_config_remota"
+        android:textStyle="bold"
+        tools:text="Título Configuración Remota"/>
+
+    <TextView
+        android:id="@+id/tvTexto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvTitulo"
+        android:textSize="@dimen/texto_descripcion_config_remota"
+        tools:text="Aquí aparecerá la descripción de nuestro texto. Esta descripción vendrá de la configuración remota."/>
+</RelativeLayout>
