@@ -53,4 +53,8 @@
     <string name="notificacion_deportes">Deportes</string>
     <string name="notificacion_entretenimiento">Entretenimiento</string>
     <string name="opciones_notificaciones">Opciones de Notificaciones</string>
+    <string name="almacenamiento">Almacenamiento</string>
+    <string name="seleccionar_imagen">Seleccionar Imagen</string>
+    <string name="tomar_foto">Tomar Foto</string>
+    <string name="guardar_imagen">Guardar Imagen</string>
 </resources>
