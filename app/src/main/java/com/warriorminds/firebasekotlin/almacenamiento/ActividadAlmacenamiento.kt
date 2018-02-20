@@ -22,7 +22,9 @@ class ActividadAlmacenamiento : AppCompatActivity() {
 
     private val CODIGO_PERMISOS: Int = 1000
     private val CODIGO_GALERIA: Int = 2001
+    private val CODIGO_CAMARA: Int = 3001
     private var uriImagen: Uri? = null
+    private var imagenCamara: Bitmap? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,16 +35,31 @@ class ActividadAlmacenamiento : AppCompatActivity() {
             abrirGaleria()
         }
 
+        botonCamara.setOnClickListener {
+            abrirCamara()
+        }
+
         botonGuardarImagen.setOnClickListener {
             uriImagen?.let {
                 ComprimirImagenUri(contentResolver).execute(uriImagen)
+            }
+            imagenCamara?.let {
+                ComprimirImagenBitmap().execute(imagenCamara)
             }
         }
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         when (requestCode) {
-            CODIGO_PERMISOS -> if (grantResults[0] != PackageManager.PERMISSION_GRANTED) finish()
+            CODIGO_PERMISOS ->
+                if (grantResults[0] != PackageManager.PERMISSION_GRANTED
+                        || grantResults[1] != PackageManager.PERMISSION_GRANTED
+                        || grantResults[2] != PackageManager.PERMISSION_GRANTED) {
+                    finish()
+                } else {
+                    botonGaleria.isEnabled = true
+                    botonCamara.isEnabled = true
+                }
         }
     }
 
@@ -51,14 +68,26 @@ class ActividadAlmacenamiento : AppCompatActivity() {
 
         if (requestCode == CODIGO_GALERIA && resultCode == Activity.RESULT_OK) {
             uriImagen = data?.data
+            imagenCamara = null
             Picasso.with(this).load(uriImagen).into(imagen)
+            botonGuardarImagen.isEnabled = true
+        } else if (requestCode == CODIGO_CAMARA && resultCode == Activity.RESULT_OK) {
+            imagenCamara = data?.extras?.get("data") as Bitmap
+            uriImagen = null
+            imagen.setImageBitmap(imagenCamara)
             botonGuardarImagen.isEnabled = true
         }
     }
 
     private fun verificarPermisos() {
-        if (!checarPermiso(Manifest.permission.READ_EXTERNAL_STORAGE)) {
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), CODIGO_PERMISOS)
+        if (!checarPermiso(Manifest.permission.READ_EXTERNAL_STORAGE)
+                || !checarPermiso(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                || !checarPermiso(Manifest.permission.CAMERA)) {
+            ActivityCompat.requestPermissions(this,
+                    arrayOf(
+                            Manifest.permission.READ_EXTERNAL_STORAGE,
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                            Manifest.permission.CAMERA), CODIGO_PERMISOS)
         } else {
             botonGaleria.isEnabled = true
             botonCamara.isEnabled = true
@@ -74,6 +103,11 @@ class ActividadAlmacenamiento : AppCompatActivity() {
         startActivityForResult(intent, CODIGO_GALERIA)
     }
 
+    private fun abrirCamara() {
+        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        startActivityForResult(intent, CODIGO_CAMARA)
+    }
+
     public class ComprimirImagenUri(val contentResolver: ContentResolver)
         : AsyncTask<Uri, Unit, ByteArray?>() {
 
@@ -87,6 +121,19 @@ class ActividadAlmacenamiento : AppCompatActivity() {
 
         override fun onPostExecute(result: ByteArray?) {
             
+        }
+    }
+
+    public class ComprimirImagenBitmap() : AsyncTask<Bitmap, Unit, ByteArray?>() {
+        private val LIMITE_MB = 5.0
+        private val MB = 1000000.0
+
+        override fun doInBackground(vararg params: Bitmap?): ByteArray? {
+            return params[0]?.comprimirImagen(MB, LIMITE_MB)
+        }
+
+        override fun onPostExecute(result: ByteArray?) {
+
         }
     }
 }
