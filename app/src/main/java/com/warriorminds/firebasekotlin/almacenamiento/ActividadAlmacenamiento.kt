@@ -13,12 +13,16 @@ import android.provider.MediaStore
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
+import android.widget.Toast
+import com.google.firebase.auth.FirebaseAuth
 import com.squareup.picasso.Picasso
 import com.warriorminds.firebasekotlin.R
 import kotlinx.android.synthetic.main.actividad_almacenamiento.*
 import java.io.ByteArrayOutputStream
+import java.text.SimpleDateFormat
+import java.util.*
 
-class ActividadAlmacenamiento : AppCompatActivity() {
+class ActividadAlmacenamiento : AppCompatActivity(), SubirImagen {
 
     private val CODIGO_PERMISOS: Int = 1000
     private val CODIGO_GALERIA: Int = 2001
@@ -29,6 +33,11 @@ class ActividadAlmacenamiento : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.actividad_almacenamiento)
+
+        if (FirebaseAuth.getInstance().currentUser == null) {
+            Toast.makeText(this, "Debes iniciar sesión.", Toast.LENGTH_SHORT).show()
+            finish()
+        }
 
         verificarPermisos()
         botonGaleria.setOnClickListener {
@@ -41,10 +50,10 @@ class ActividadAlmacenamiento : AppCompatActivity() {
 
         botonGuardarImagen.setOnClickListener {
             uriImagen?.let {
-                ComprimirImagenUri(contentResolver).execute(uriImagen)
+                ComprimirImagenUri(contentResolver, this).execute(uriImagen)
             }
             imagenCamara?.let {
-                ComprimirImagenBitmap().execute(imagenCamara)
+                ComprimirImagenBitmap(this).execute(imagenCamara)
             }
         }
     }
@@ -79,6 +88,10 @@ class ActividadAlmacenamiento : AppCompatActivity() {
         }
     }
 
+    override fun subirImagen(imagen: ByteArray?) {
+        val nombre = "${imagen?.nombreArchivo()}.jpg"
+    }
+
     private fun verificarPermisos() {
         if (!checarPermiso(Manifest.permission.READ_EXTERNAL_STORAGE)
                 || !checarPermiso(Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -108,7 +121,7 @@ class ActividadAlmacenamiento : AppCompatActivity() {
         startActivityForResult(intent, CODIGO_CAMARA)
     }
 
-    public class ComprimirImagenUri(val contentResolver: ContentResolver)
+    public class ComprimirImagenUri(val contentResolver: ContentResolver, val listener: SubirImagen)
         : AsyncTask<Uri, Unit, ByteArray?>() {
 
         private val LIMITE_MB = 5.0
@@ -120,11 +133,11 @@ class ActividadAlmacenamiento : AppCompatActivity() {
         }
 
         override fun onPostExecute(result: ByteArray?) {
-            
+            listener.subirImagen(result)
         }
     }
 
-    public class ComprimirImagenBitmap() : AsyncTask<Bitmap, Unit, ByteArray?>() {
+    public class ComprimirImagenBitmap(val listener: SubirImagen) : AsyncTask<Bitmap, Unit, ByteArray?>() {
         private val LIMITE_MB = 5.0
         private val MB = 1000000.0
 
@@ -133,9 +146,13 @@ class ActividadAlmacenamiento : AppCompatActivity() {
         }
 
         override fun onPostExecute(result: ByteArray?) {
-
+            listener.subirImagen(result)
         }
     }
+}
+
+interface SubirImagen {
+    fun subirImagen(imagen: ByteArray?)
 }
 
 fun Bitmap.comprimirImagen(mb: Double, limiteMb: Double): ByteArray? {
@@ -149,4 +166,9 @@ fun Bitmap.comprimirImagen(mb: Double, limiteMb: Double): ByteArray? {
         }
     }
     return bytes
+}
+
+fun ByteArray.nombreArchivo(): String {
+    val formato = SimpleDateFormat("yyyy_MM_dd_HH_mm_ss")
+    return formato.format(Date())
 }
