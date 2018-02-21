@@ -59,4 +59,7 @@
     <string name="guardar_imagen">Guardar Imagen</string>
     <string name="descargar_imagen">Descargar Imagen</string>
     <string name="error_descarga_imagen">Error al descargar la imagen.</string>
+    <string name="eliminar_imagen">Eliminar Imagen</string>
+    <string name="imagen_eliminada">La imagen se ha eliminado.</string>
+    <string name="error_eliminar_imagen">Hubo un error al eliminar la imagen.</string>
 </resources>

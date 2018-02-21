@@ -28,6 +28,7 @@ import java.util.*
 class ActividadAlmacenamiento : AppCompatActivity(), SubirImagen {
 
     private val NOMBRE_IMAGEN = "2018_02_20_18_52_12.jpg"
+    private val IMAGEN_ELIMINAR = "2018_02_20_18_56_56.jpg"
     private val CODIGO_PERMISOS: Int = 1000
     private val CODIGO_GALERIA: Int = 2001
     private val CODIGO_CAMARA: Int = 3001
@@ -63,6 +64,10 @@ class ActividadAlmacenamiento : AppCompatActivity(), SubirImagen {
 
         botonDescargarImagen.setOnClickListener {
             descargarImagen()
+        }
+
+        botonEliminarImagen.setOnClickListener {
+            eliminarImagen()
         }
     }
 
@@ -157,6 +162,19 @@ class ActividadAlmacenamiento : AppCompatActivity(), SubirImagen {
         }.addOnFailureListener {
             progresoAlmacenamiento.visibility = View.GONE
             Toast.makeText(this, getString(R.string.error_descarga_imagen), Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun eliminarImagen() {
+        val referencia = FirebaseStorage.getInstance().reference
+                .child("imagenes/${FirebaseAuth.getInstance().currentUser?.uid}/$IMAGEN_ELIMINAR")
+        progresoAlmacenamiento.visibility = View.VISIBLE
+        referencia.delete().addOnSuccessListener {
+            progresoAlmacenamiento.visibility = View.GONE
+            Toast.makeText(this, getString(R.string.imagen_eliminada), Toast.LENGTH_SHORT).show()
+        }.addOnFailureListener {
+            progresoAlmacenamiento.visibility = View.GONE
+            Toast.makeText(this, getString(R.string.error_eliminar_imagen), Toast.LENGTH_SHORT).show()
         }
     }
 

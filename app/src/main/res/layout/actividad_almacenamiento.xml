@@ -60,4 +60,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/descargar_imagen"/>
+
+    <Button
+        android:id="@+id/botonEliminarImagen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/eliminar_imagen"/>
 </LinearLayout>
