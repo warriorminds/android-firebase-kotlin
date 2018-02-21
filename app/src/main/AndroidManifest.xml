@@ -2,6 +2,10 @@
 <manifest package="com.warriorminds.firebasekotlin"
           xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <application
         android:name=".Aplicacion"
         android:allowBackup="true"
@@ -66,6 +70,8 @@
         <activity android:name=".notificaciones.ActividadNotificaciones">
         </activity>
         <activity android:name=".configuracion_remota.ActividadConfiguracionRemota">
+        </activity>
+        <activity android:name=".almacenamiento.ActividadAlmacenamiento">
         </activity>
     </application>
 

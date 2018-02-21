@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
+import com.warriorminds.firebasekotlin.almacenamiento.ActividadAlmacenamiento
 import com.warriorminds.firebasekotlin.analytics.ActividadAnalytics
 import com.warriorminds.firebasekotlin.autenticacion.ActividadAutenticacionAnonima
 import com.warriorminds.firebasekotlin.autenticacion.ActividadAutenticacionCorreo
@@ -52,6 +53,10 @@ class ActividadPrincipal : AppCompatActivity() {
 
         botonNotificaciones.setOnClickListener {
             iniciarActividad(ActividadNotificaciones::class.java)
+        }
+
+        botonAlmacenamiento.setOnClickListener {
+            iniciarActividad(ActividadAlmacenamiento::class.java)
         }
 
         inicializarConfiguracionRemota()
