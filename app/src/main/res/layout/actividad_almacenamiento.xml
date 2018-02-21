@@ -16,54 +16,66 @@
         android:layout_gravity="center_horizontal"
         android:visibility="gone"/>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/botonGaleria"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:enabled="false"
-            android:text="@string/seleccionar_imagen"/>
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <Button
-            android:id="@+id/botonCamara"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:enabled="false"
-            android:text="@string/tomar_foto"/>
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-    <ImageView
-        android:id="@+id/imagen"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+                <Button
+                    android:id="@+id/botonGaleria"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:enabled="false"
+                    android:text="@string/seleccionar_imagen"/>
 
-    <Button
-        android:id="@+id/botonGuardarImagen"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:enabled="false"
-        android:text="@string/guardar_imagen"/>
+                <Button
+                    android:id="@+id/botonCamara"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:enabled="false"
+                    android:text="@string/tomar_foto"/>
+            </LinearLayout>
 
-    <ImageView
-        android:id="@+id/imagenDescargada"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+            <ImageView
+                android:id="@+id/imagen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
 
-    <Button
-        android:id="@+id/botonDescargarImagen"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/descargar_imagen"/>
+            <Button
+                android:id="@+id/botonGuardarImagen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:text="@string/guardar_imagen"/>
 
-    <Button
-        android:id="@+id/botonEliminarImagen"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/eliminar_imagen"/>
+            <ImageView
+                android:id="@+id/imagenDescargada"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <Button
+                android:id="@+id/botonDescargarImagen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/descargar_imagen"/>
+
+            <Button
+                android:id="@+id/botonEliminarImagen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/eliminar_imagen"/>
+
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>
