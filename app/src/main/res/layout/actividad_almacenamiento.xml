@@ -49,4 +49,15 @@
         android:layout_height="wrap_content"
         android:enabled="false"
         android:text="@string/guardar_imagen"/>
+
+    <ImageView
+        android:id="@+id/imagenDescargada"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/botonDescargarImagen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/descargar_imagen"/>
 </LinearLayout>

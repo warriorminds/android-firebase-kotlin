@@ -57,4 +57,6 @@
     <string name="seleccionar_imagen">Seleccionar Imagen</string>
     <string name="tomar_foto">Tomar Foto</string>
     <string name="guardar_imagen">Guardar Imagen</string>
+    <string name="descargar_imagen">Descargar Imagen</string>
+    <string name="error_descarga_imagen">Error al descargar la imagen.</string>
 </resources>

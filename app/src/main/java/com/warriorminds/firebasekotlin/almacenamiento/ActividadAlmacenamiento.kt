@@ -27,6 +27,7 @@ import java.util.*
 
 class ActividadAlmacenamiento : AppCompatActivity(), SubirImagen {
 
+    private val NOMBRE_IMAGEN = "2018_02_20_18_52_12.jpg"
     private val CODIGO_PERMISOS: Int = 1000
     private val CODIGO_GALERIA: Int = 2001
     private val CODIGO_CAMARA: Int = 3001
@@ -58,6 +59,10 @@ class ActividadAlmacenamiento : AppCompatActivity(), SubirImagen {
             imagenCamara?.let {
                 ComprimirImagenBitmap(this).execute(imagenCamara)
             }
+        }
+
+        botonDescargarImagen.setOnClickListener {
+            descargarImagen()
         }
     }
 
@@ -140,6 +145,19 @@ class ActividadAlmacenamiento : AppCompatActivity(), SubirImagen {
     private fun abrirCamara() {
         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         startActivityForResult(intent, CODIGO_CAMARA)
+    }
+
+    private fun descargarImagen() {
+        val referencia = FirebaseStorage.getInstance().reference
+                .child("imagenes/${FirebaseAuth.getInstance().currentUser?.uid}/$NOMBRE_IMAGEN")
+        progresoAlmacenamiento.visibility = View.VISIBLE
+        referencia.downloadUrl.addOnSuccessListener {
+            progresoAlmacenamiento.visibility = View.GONE
+            Picasso.with(this).load(it).into(imagenDescargada)
+        }.addOnFailureListener {
+            progresoAlmacenamiento.visibility = View.GONE
+            Toast.makeText(this, getString(R.string.error_descarga_imagen), Toast.LENGTH_SHORT).show()
+        }
     }
 
     public class ComprimirImagenUri(val contentResolver: ContentResolver, val listener: SubirImagen)
