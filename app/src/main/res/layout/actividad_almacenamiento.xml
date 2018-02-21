@@ -9,6 +9,13 @@
     android:padding="@dimen/padding_normal"
     tools:context="com.warriorminds.firebasekotlin.almacenamiento.ActividadAlmacenamiento">
 
+    <ProgressBar
+        android:id="@+id/progresoAlmacenamiento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:visibility="gone"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

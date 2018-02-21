@@ -13,8 +13,11 @@ import android.provider.MediaStore
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
+import android.view.View
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageMetadata
 import com.squareup.picasso.Picasso
 import com.warriorminds.firebasekotlin.R
 import kotlinx.android.synthetic.main.actividad_almacenamiento.*
@@ -89,7 +92,25 @@ class ActividadAlmacenamiento : AppCompatActivity(), SubirImagen {
     }
 
     override fun subirImagen(imagen: ByteArray?) {
-        val nombre = "${imagen?.nombreArchivo()}.jpg"
+        imagen?.let {
+            progresoAlmacenamiento.visibility = View.VISIBLE
+            val nombre = "${it.nombreArchivo()}.jpg"
+            val referencia = FirebaseStorage.getInstance().reference
+                    .child("imagenes/${FirebaseAuth.getInstance().currentUser?.uid}/$nombre")
+            val metadata = StorageMetadata.Builder()
+                    .setContentType("image/jpg")
+                    .setContentLanguage("es")
+                    .setCustomMetadata("WarriorMinds", "Subiendo imágenes a Firebase")
+                    .build()
+            val tarea = referencia.putBytes(it, metadata)
+            tarea.addOnSuccessListener {
+                Toast.makeText(this@ActividadAlmacenamiento, "Se ha subido la imagen: ${it.downloadUrl}", Toast.LENGTH_SHORT).show()
+                progresoAlmacenamiento.visibility = View.GONE
+            }.addOnFailureListener {
+                Toast.makeText(this@ActividadAlmacenamiento, "Ha habido un error al subir la imagen.", Toast.LENGTH_SHORT).show()
+                progresoAlmacenamiento.visibility = View.GONE
+            }
+        }
     }
 
     private fun verificarPermisos() {
