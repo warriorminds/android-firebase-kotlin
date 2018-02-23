@@ -12,6 +12,7 @@ import com.warriorminds.firebasekotlin.autenticacion.ActividadAutenticacionAnoni
 import com.warriorminds.firebasekotlin.autenticacion.ActividadAutenticacionCorreo
 import com.warriorminds.firebasekotlin.autenticacion.ActividadIniciarSesionProveedores
 import com.warriorminds.firebasekotlin.autenticacion.ActividadSesionTelefono
+import com.warriorminds.firebasekotlin.base_datos.ActividadBaseDatosNotas
 import com.warriorminds.firebasekotlin.configuracion_remota.ActividadConfiguracionRemota
 import com.warriorminds.firebasekotlin.notificaciones.ActividadNotificaciones
 import kotlinx.android.synthetic.main.actividad_principal.*
@@ -57,6 +58,10 @@ class ActividadPrincipal : AppCompatActivity() {
 
         botonAlmacenamiento.setOnClickListener {
             iniciarActividad(ActividadAlmacenamiento::class.java)
+        }
+
+        botonBaseDatos.setOnClickListener {
+            iniciarActividad(ActividadBaseDatosNotas::class.java)
         }
 
         inicializarConfiguracionRemota()
