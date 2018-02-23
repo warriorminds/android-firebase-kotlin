@@ -5,4 +5,7 @@
     <dimen name="line">1dp</dimen>
     <dimen name="titulo_config_remota">28sp</dimen>
     <dimen name="texto_descripcion_config_remota">18sp</dimen>
+    <dimen name="titulo_nota">20sp</dimen>
+    <dimen name="contenido_nota">18sp</dimen>
+    <dimen name="autor_nota">16sp</dimen>
 </resources>
