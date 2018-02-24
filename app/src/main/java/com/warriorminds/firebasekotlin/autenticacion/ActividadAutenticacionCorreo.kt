@@ -8,7 +8,9 @@ import android.widget.Toast
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.FirebaseDatabase
 import com.warriorminds.firebasekotlin.R
+import com.warriorminds.firebasekotlin.base_datos.Usuario
 import kotlinx.android.synthetic.main.actividad_autenticacion_correo.*
 
 class ActividadAutenticacionCorreo : AppCompatActivity(), ICrearCuenta, IRecuperarContrasena, ICambiarContrasena {
@@ -61,6 +63,7 @@ class ActividadAutenticacionCorreo : AppCompatActivity(), ICrearCuenta, IRecuper
                                 return@addOnCompleteListener
                             } else {
                                 enviarCorreoVerificacion()
+                                crearUsuarioEnBaseDatos(it)
                             }
                         }
                     } else {
@@ -155,5 +158,13 @@ class ActividadAutenticacionCorreo : AppCompatActivity(), ICrearCuenta, IRecuper
                         }
                     }
         }
+    }
+
+    private fun crearUsuarioEnBaseDatos(usuarioFirebase: FirebaseUser) {
+        val nombreUsuario = usuarioFirebase.email!!.split("@")[0]
+        val usuario = Usuario(usuarioFirebase.email!!, nombreUsuario)
+        val referencia = FirebaseDatabase.getInstance().reference
+
+        referencia.child("usuarios").child(usuarioFirebase.uid).setValue(usuario)
     }
 }
