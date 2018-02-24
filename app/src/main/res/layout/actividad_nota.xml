@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/padding_normal"
+    tools:context="com.warriorminds.firebasekotlin.base_datos.ActividadNota">
+
+    <TextView
+        android:id="@+id/tvTituloNotaDetalles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/titulo_nota"
+        android:textStyle="bold"
+        tools:text="@string/hint_titulo_nota"/>
+
+    <TextView
+        android:id="@+id/tvAutorNotaDetalles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/autor_nota"
+        tools:text="@string/autor_nota"/>
+
+    <TextView
+        android:id="@+id/tvContenidoNotaDetalles"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/contenido_nota"
+        tools:text="@string/contenido_nota"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/tiComentario"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7">
+
+            <EditText
+                android:id="@+id/etComentario"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/hint_comentario"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:id="@+id/botonEnviarComentario"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:text="@string/comentar"/>
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvComentarios"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:listitem="@layout/elemento_comentario"/>
+</LinearLayout>
