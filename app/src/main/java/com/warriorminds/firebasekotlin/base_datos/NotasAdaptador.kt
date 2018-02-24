@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.elemento_nota.view.*
 /**
  * Created by rodrigo on 23/02/18.
  */
-class NotasAdaptador(val notas: List<Nota>) : RecyclerView.Adapter<NotasAdaptador.NotasViewHolder>() {
+class NotasAdaptador(var notas: List<Nota> = ArrayList()) : RecyclerView.Adapter<NotasAdaptador.NotasViewHolder>() {
     override fun onBindViewHolder(holder: NotasViewHolder, position: Int) = holder.bind(notas[position])
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotasViewHolder {
