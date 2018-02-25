@@ -6,4 +6,5 @@ package com.warriorminds.firebasekotlin.base_datos
 data class Nota(val autor: String = "",
                 val titulo: String = "",
                 val texto: String = "",
-                val uid: String = "")
+                val uid: String = "",
+                var id: String = "")
