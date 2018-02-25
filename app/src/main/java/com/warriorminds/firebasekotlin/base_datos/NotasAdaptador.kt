@@ -1,5 +1,6 @@
 package com.warriorminds.firebasekotlin.base_datos
 
+import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -25,6 +26,11 @@ class NotasAdaptador(var notas: List<Nota> = ArrayList()) : RecyclerView.Adapter
             tvTituloNota.text = nota.titulo
             tvContenidoNota.text = nota.texto
             tvAutorNota.text = nota.autor
+            itemView.setOnClickListener {
+                val intent = Intent(itemView.context, ActividadNota::class.java)
+                intent.putExtra(ActividadNota.ID_NOTA, nota.id)
+                itemView.context.startActivity(intent)
+            }
         }
     }
 }

@@ -58,8 +58,10 @@ class ActividadBaseDatosNotas : AppCompatActivity() {
 
         override fun onDataChange(datos: DataSnapshot) {
             val notas = ArrayList<Nota>()
-            datos.children.mapNotNullTo(notas) {
-                it.getValue<Nota>(Nota::class.java)
+            datos.children.forEach {
+                val nota = it.getValue(Nota::class.java) as Nota
+                nota.id = it.key
+                notas.add(nota)
             }
             adaptador.notas = notas
             adaptador.notifyDataSetChanged()

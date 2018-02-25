@@ -10,7 +10,8 @@ import kotlinx.android.synthetic.main.elemento_comentario.view.*
 /**
  * Created by rodrigo on 24/02/18.
  */
-class ComentariosAdaptador(val comentarios: List<Comentario>) : RecyclerView.Adapter<ComentariosAdaptador.ComentariosViewHolder>() {
+class ComentariosAdaptador(val comentarios: MutableList<Comentario> = mutableListOf(),
+                           val idsComentarios: MutableList<String> = mutableListOf()) : RecyclerView.Adapter<ComentariosAdaptador.ComentariosViewHolder>() {
     override fun onBindViewHolder(holder: ComentariosViewHolder, position: Int) = holder.bind(comentarios[position])
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
