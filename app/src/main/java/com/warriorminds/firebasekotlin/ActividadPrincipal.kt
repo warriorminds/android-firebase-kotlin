@@ -1,9 +1,12 @@
 package com.warriorminds.firebasekotlin
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v4.view.MenuItemCompat
+import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.ShareActionProvider
 import android.util.Log
+import android.view.Menu
 import com.google.firebase.crash.FirebaseCrash
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
@@ -73,6 +76,18 @@ class ActividadPrincipal : AppCompatActivity() {
 
         inicializarConfiguracionRemota()
         mostrarActividadConfiguracionRemota()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_principal, menu)
+
+        val menuCompartir = menu.findItem(R.id.menu_compartir)
+        val proveedorCompartir = MenuItemCompat.getActionProvider(menuCompartir) as ShareActionProvider
+        val intent = Intent(Intent.ACTION_SEND)
+        intent.type = "text/plain"
+        intent.putExtra(Intent.EXTRA_TEXT, "Texto de prueba")
+        proveedorCompartir.setShareIntent(intent)
+        return true
     }
 
     private fun iniciarActividad(claseDeActividad: Class<*>) {

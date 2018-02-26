@@ -71,4 +71,5 @@
     <string name="comentario_ejemplo">Este es un comentario</string>
     <string name="usuario_inexistente">Usuario inexistente.</string>
     <string name="generar_crash">Generar un Crash</string>
+    <string name="compartir">Compartir</string>
 </resources>
