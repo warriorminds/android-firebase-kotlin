@@ -67,6 +67,7 @@ class ActividadPrincipal : AppCompatActivity() {
         }
 
         botonCrash.setOnClickListener {
+            FirebaseCrash.log("Reportando evento desde la app.")    
             throw Exception("Excepción causada para probar Crashlytics.")
         }
 
