@@ -62,4 +62,12 @@
     <string name="eliminar_imagen">Eliminar Imagen</string>
     <string name="imagen_eliminada">La imagen se ha eliminado.</string>
     <string name="error_eliminar_imagen">Hubo un error al eliminar la imagen.</string>
+    <string name="base_de_datos">Base de datos</string>
+    <string name="hint_titulo_nota">Título</string>
+    <string name="contenido_nota">Contenido de la Nota</string>
+    <string name="autor_nota">Autor</string>
+    <string name="hint_comentario">Comentario</string>
+    <string name="comentar">Comentar</string>
+    <string name="comentario_ejemplo">Este es un comentario</string>
+    <string name="usuario_inexistente">Usuario inexistente.</string>
 </resources>

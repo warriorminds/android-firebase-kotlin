@@ -49,4 +49,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/almacenamiento"/>
+
+    <Button
+        android:id="@+id/botonBaseDatos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/base_de_datos"/>
 </LinearLayout>
