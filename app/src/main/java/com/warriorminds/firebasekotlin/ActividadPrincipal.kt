@@ -4,6 +4,7 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import com.google.firebase.crash.FirebaseCrash
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
 import com.warriorminds.firebasekotlin.almacenamiento.ActividadAlmacenamiento
@@ -16,6 +17,7 @@ import com.warriorminds.firebasekotlin.base_datos.ActividadBaseDatosNotas
 import com.warriorminds.firebasekotlin.configuracion_remota.ActividadConfiguracionRemota
 import com.warriorminds.firebasekotlin.notificaciones.ActividadNotificaciones
 import kotlinx.android.synthetic.main.actividad_principal.*
+import java.lang.Exception
 
 class ActividadPrincipal : AppCompatActivity() {
 
@@ -62,6 +64,10 @@ class ActividadPrincipal : AppCompatActivity() {
 
         botonBaseDatos.setOnClickListener {
             iniciarActividad(ActividadBaseDatosNotas::class.java)
+        }
+
+        botonCrash.setOnClickListener {
+            throw Exception("Excepción causada para probar Crashlytics.")
         }
 
         inicializarConfiguracionRemota()
