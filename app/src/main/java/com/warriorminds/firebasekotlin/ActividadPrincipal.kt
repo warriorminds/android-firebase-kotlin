@@ -1,6 +1,7 @@
 package com.warriorminds.firebasekotlin
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.support.v4.view.MenuItemCompat
 import android.support.v7.app.AppCompatActivity
@@ -8,6 +9,8 @@ import android.support.v7.widget.ShareActionProvider
 import android.util.Log
 import android.view.Menu
 import com.google.firebase.crash.FirebaseCrash
+import com.google.firebase.dynamiclinks.DynamicLink
+import com.google.firebase.dynamiclinks.FirebaseDynamicLinks
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
 import com.warriorminds.firebasekotlin.almacenamiento.ActividadAlmacenamiento
@@ -26,6 +29,7 @@ class ActividadPrincipal : AppCompatActivity() {
 
     private val TAG = ActividadPrincipal::class.java.simpleName
     private val configuracionRemota = FirebaseRemoteConfig.getInstance()
+    private var ligaDinamica: Uri? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,18 +80,25 @@ class ActividadPrincipal : AppCompatActivity() {
 
         inicializarConfiguracionRemota()
         mostrarActividadConfiguracionRemota()
+        crearLigaDinamica()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_principal, menu)
 
         val menuCompartir = menu.findItem(R.id.menu_compartir)
-        val proveedorCompartir = MenuItemCompat.getActionProvider(menuCompartir) as ShareActionProvider
-        val intent = Intent(Intent.ACTION_SEND)
-        intent.type = "text/plain"
-        intent.putExtra(Intent.EXTRA_TEXT, "Texto de prueba")
-        proveedorCompartir.setShareIntent(intent)
-        return true
+
+        ligaDinamica?.let {
+            val proveedorCompartir = MenuItemCompat.getActionProvider(menuCompartir) as ShareActionProvider
+            val intent = Intent(Intent.ACTION_SEND)
+            intent.type = "text/plain"
+
+            intent.putExtra(Intent.EXTRA_SUBJECT, "Ligas dinámicas")
+            intent.putExtra(Intent.EXTRA_TEXT, "Esta es una liga dinámica: ${ligaDinamica.toString()}")
+            proveedorCompartir.setShareIntent(intent)
+            return true
+        }
+        return false
     }
 
     private fun iniciarActividad(claseDeActividad: Class<*>) {
@@ -129,5 +140,33 @@ class ActividadPrincipal : AppCompatActivity() {
             intent.putExtra(ActividadConfiguracionRemota.TEXTO, texto)
             startActivity(intent)
         }
+    }
+
+    private fun crearLigaDinamica() {
+        val ligaDinamica = FirebaseDynamicLinks.getInstance().createDynamicLink()
+                .setLink(Uri.parse("https://warriorminds.github.io/ligas"))
+                .setDynamicLinkDomain("g5b98.app.goo.gl")
+                .setAndroidParameters(DynamicLink.AndroidParameters.Builder()
+                        .setMinimumVersion(1)
+                        .build())
+                .setIosParameters(DynamicLink.IosParameters.Builder("com.warriorminds")
+                        .setFallbackUrl(Uri.parse("https://warriorminds.github.io/"))
+                        .build())
+                .setGoogleAnalyticsParameters(DynamicLink.GoogleAnalyticsParameters.Builder()
+                        .setSource("compartir")
+                        .setMedium("social")
+                        .setCampaign("prueba")
+                        .build())
+                .setSocialMetaTagParameters(DynamicLink.SocialMetaTagParameters.Builder()
+                        .setTitle("Título para redes sociales.")
+                        .setDescription("Descripción para redes sociales.")
+                        .build())
+                .buildShortDynamicLink()
+                .addOnCompleteListener {
+                    if (it.isSuccessful) {
+                        ligaDinamica = it.result.shortLink
+                        invalidateOptionsMenu()
+                    }
+                }
     }
 }
