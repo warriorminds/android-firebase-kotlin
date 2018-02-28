@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.ShareActionProvider
 import android.util.Log
 import android.view.Menu
+import android.widget.Toast
 import com.google.firebase.crash.FirebaseCrash
 import com.google.firebase.dynamiclinks.DynamicLink
 import com.google.firebase.dynamiclinks.FirebaseDynamicLinks
@@ -81,6 +82,7 @@ class ActividadPrincipal : AppCompatActivity() {
         inicializarConfiguracionRemota()
         mostrarActividadConfiguracionRemota()
         crearLigaDinamica()
+        recibiendoLigaDinamica()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -167,6 +169,21 @@ class ActividadPrincipal : AppCompatActivity() {
                         ligaDinamica = it.result.shortLink
                         invalidateOptionsMenu()
                     }
+                }
+    }
+
+    private fun recibiendoLigaDinamica() {
+        FirebaseDynamicLinks.getInstance().getDynamicLink(intent)
+                .addOnSuccessListener {
+                    var liga: Uri?
+                    it?.let {
+                        liga = it.link
+                        liga?.let {
+                            Toast.makeText(this@ActividadPrincipal, "Recibimos la acción ${it.lastPathSegment}", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }.addOnFailureListener {
+                    Toast.makeText(this, "Hubo un error al leer la liga dinámica", Toast.LENGTH_SHORT).show()
                 }
     }
 }
