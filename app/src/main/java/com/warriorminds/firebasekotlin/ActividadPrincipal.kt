@@ -10,6 +10,8 @@ import android.support.v7.widget.ShareActionProvider
 import android.util.Log
 import android.view.Menu
 import android.widget.Toast
+import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.appinvite.AppInviteInvitation
 import com.google.firebase.appinvite.FirebaseAppInvite
 import com.google.firebase.crash.FirebaseCrash
@@ -91,6 +93,7 @@ class ActividadPrincipal : AppCompatActivity() {
         mostrarActividadConfiguracionRemota()
         crearLigaDinamica()
         recibiendoLigaDinamica()
+        inicializarBanner()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -217,5 +220,30 @@ class ActividadPrincipal : AppCompatActivity() {
                 .setCallToActionText("WarriorMinds")
                 .build()
         startActivityForResult(intent, CODIGO_INVITACION)
+    }
+
+    private fun inicializarBanner() {
+        banner.loadAd(AdRequest.Builder().build())
+        banner.adListener = object : AdListener() {
+            override fun onAdLoaded() {
+
+            }
+
+            override fun onAdFailedToLoad(errorCode : Int) {
+
+            }
+
+            override fun onAdOpened() {
+
+            }
+
+            override fun onAdLeftApplication() {
+
+            }
+
+            override fun onAdClosed() {
+
+            }
+        }
     }
 }
