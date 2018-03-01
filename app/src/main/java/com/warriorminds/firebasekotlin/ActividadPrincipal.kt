@@ -12,6 +12,7 @@ import android.view.Menu
 import android.widget.Toast
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.InterstitialAd
 import com.google.android.gms.appinvite.AppInviteInvitation
 import com.google.firebase.appinvite.FirebaseAppInvite
 import com.google.firebase.crash.FirebaseCrash
@@ -37,6 +38,7 @@ class ActividadPrincipal : AppCompatActivity() {
     private val CODIGO_INVITACION = 4000
     private val configuracionRemota = FirebaseRemoteConfig.getInstance()
     private var ligaDinamica: Uri? = null
+    private var anuncio: InterstitialAd? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -89,11 +91,16 @@ class ActividadPrincipal : AppCompatActivity() {
             enviarInvitacion()
         }
 
+        botonAnuncioIntersticial.setOnClickListener {
+            anuncio?.let { it.show() }
+        }
+
         inicializarConfiguracionRemota()
         mostrarActividadConfiguracionRemota()
         crearLigaDinamica()
         recibiendoLigaDinamica()
         inicializarBanner()
+        crearIntersticial()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -243,6 +250,17 @@ class ActividadPrincipal : AppCompatActivity() {
 
             override fun onAdClosed() {
 
+            }
+        }
+    }
+
+    private fun crearIntersticial() {
+        anuncio = InterstitialAd(this)
+        anuncio!!.adUnitId = "ca-app-pub-3940256099942544/1033173712"
+        anuncio!!.loadAd(AdRequest.Builder().build())
+        anuncio!!.adListener = object: AdListener() {
+            override fun onAdClosed() {
+                anuncio!!.loadAd(AdRequest.Builder().build())
             }
         }
     }
