@@ -1,5 +1,6 @@
 package com.warriorminds.firebasekotlin
 
+import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -9,6 +10,8 @@ import android.support.v7.widget.ShareActionProvider
 import android.util.Log
 import android.view.Menu
 import android.widget.Toast
+import com.google.android.gms.appinvite.AppInviteInvitation
+import com.google.firebase.appinvite.FirebaseAppInvite
 import com.google.firebase.crash.FirebaseCrash
 import com.google.firebase.dynamiclinks.DynamicLink
 import com.google.firebase.dynamiclinks.FirebaseDynamicLinks
@@ -29,6 +32,7 @@ import java.lang.Exception
 class ActividadPrincipal : AppCompatActivity() {
 
     private val TAG = ActividadPrincipal::class.java.simpleName
+    private val CODIGO_INVITACION = 4000
     private val configuracionRemota = FirebaseRemoteConfig.getInstance()
     private var ligaDinamica: Uri? = null
 
@@ -79,6 +83,10 @@ class ActividadPrincipal : AppCompatActivity() {
             throw Exception("Excepción causada para probar Crashlytics.")
         }
 
+        botonEnviarInvitacion.setOnClickListener {
+            enviarInvitacion()
+        }
+
         inicializarConfiguracionRemota()
         mostrarActividadConfiguracionRemota()
         crearLigaDinamica()
@@ -101,6 +109,16 @@ class ActividadPrincipal : AppCompatActivity() {
             return true
         }
         return false
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == CODIGO_INVITACION && resultCode == Activity.RESULT_OK) {
+            val ids = AppInviteInvitation.getInvitationIds(resultCode, data)
+            for (id in ids) {
+                Log.d(TAG, "Id invitación: $id")
+            }
+        }
     }
 
     private fun iniciarActividad(claseDeActividad: Class<*>) {
@@ -181,9 +199,23 @@ class ActividadPrincipal : AppCompatActivity() {
                         liga?.let {
                             Toast.makeText(this@ActividadPrincipal, "Recibimos la acción ${it.lastPathSegment}", Toast.LENGTH_SHORT).show()
                         }
+                        val invitacion = FirebaseAppInvite.getInvitation(it)
+                        invitacion?.let {
+                            Toast.makeText(this@ActividadPrincipal, "Invitación ${it.invitationId}", Toast.LENGTH_SHORT).show()
+                        }
                     }
                 }.addOnFailureListener {
                     Toast.makeText(this, "Hubo un error al leer la liga dinámica", Toast.LENGTH_SHORT).show()
                 }
+    }
+
+    private fun enviarInvitacion() {
+        val intent = AppInviteInvitation.IntentBuilder("Visita WarriorMinds!")
+                .setMessage("Ven a visitar la app de Firebase!")
+                .setDeepLink(Uri.parse("https://warriorminds.github.io/invitaciones"))
+                .setCustomImage(Uri.parse("https://warriorminds.github.io//images/site-logo.png"))
+                .setCallToActionText("WarriorMinds")
+                .build()
+        startActivityForResult(intent, CODIGO_INVITACION)
     }
 }

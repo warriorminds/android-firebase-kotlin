@@ -72,4 +72,5 @@
     <string name="usuario_inexistente">Usuario inexistente.</string>
     <string name="generar_crash">Generar un Crash</string>
     <string name="compartir">Compartir</string>
+    <string name="enviar_invitacion">Enviar Invitación</string>
 </resources>
