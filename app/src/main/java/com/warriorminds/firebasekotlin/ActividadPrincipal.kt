@@ -13,6 +13,10 @@ import android.widget.Toast
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.InterstitialAd
+import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.ads.reward.RewardItem
+import com.google.android.gms.ads.reward.RewardedVideoAd
+import com.google.android.gms.ads.reward.RewardedVideoAdListener
 import com.google.android.gms.appinvite.AppInviteInvitation
 import com.google.firebase.appinvite.FirebaseAppInvite
 import com.google.firebase.crash.FirebaseCrash
@@ -39,6 +43,7 @@ class ActividadPrincipal : AppCompatActivity() {
     private val configuracionRemota = FirebaseRemoteConfig.getInstance()
     private var ligaDinamica: Uri? = null
     private var anuncio: InterstitialAd? = null
+    private var videoAnuncio: RewardedVideoAd? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -95,12 +100,38 @@ class ActividadPrincipal : AppCompatActivity() {
             anuncio?.let { it.show() }
         }
 
+        botonVideo.setOnClickListener {
+            videoAnuncio?.let {
+                if (it.isLoaded) {
+                    it.show()
+                }
+            }
+        }
+
         inicializarConfiguracionRemota()
         mostrarActividadConfiguracionRemota()
         crearLigaDinamica()
         recibiendoLigaDinamica()
         inicializarBanner()
         crearIntersticial()
+        crearVideoAnuncio()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        videoAnuncio?.let {
+            it.pause(this)
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        videoAnuncio?.let { it.resume(this) }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        videoAnuncio?.let { it.destroy(this) }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -263,5 +294,39 @@ class ActividadPrincipal : AppCompatActivity() {
                 anuncio!!.loadAd(AdRequest.Builder().build())
             }
         }
+    }
+
+    private fun crearVideoAnuncio() {
+        videoAnuncio = MobileAds.getRewardedVideoAdInstance(this)
+        videoAnuncio!!.rewardedVideoAdListener = object : RewardedVideoAdListener {
+            override fun onRewardedVideoAdClosed() {
+                videoAnuncio!!.loadAd("ca-app-pub-3940256099942544/5224354917", AdRequest.Builder().build())
+            }
+
+            override fun onRewardedVideoAdLeftApplication() {
+
+            }
+
+            override fun onRewardedVideoAdLoaded() {
+
+            }
+
+            override fun onRewardedVideoAdOpened() {
+
+            }
+
+            override fun onRewarded(recompensa: RewardItem) {
+                Toast.makeText(this@ActividadPrincipal, "Recompensa: ${recompensa.amount} de ${recompensa.type}", Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onRewardedVideoStarted() {
+
+            }
+
+            override fun onRewardedVideoAdFailedToLoad(p0: Int) {
+
+            }
+        }
+        videoAnuncio!!.loadAd("ca-app-pub-3940256099942544/5224354917", AdRequest.Builder().build())
     }
 }

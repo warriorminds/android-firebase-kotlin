@@ -83,6 +83,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/mostrar_anuncio_intersticial"/>
+
+            <Button
+                android:id="@+id/botonVideo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/mostrar_video_anuncio"/>
         </LinearLayout>
     </ScrollView>
 
