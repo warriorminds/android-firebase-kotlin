@@ -44,6 +44,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-database:11.8.0'
     implementation 'com.google.firebase:firebase-crash:11.8.0'
     implementation 'com.google.firebase:firebase-invites:11.8.0'
+    implementation 'com.google.firebase:firebase-ads:11.8.0'
 
     implementation 'com.google.android.gms:play-services-auth:11.8.0'
     implementation 'com.facebook.android:facebook-android-sdk:4.17.0'
