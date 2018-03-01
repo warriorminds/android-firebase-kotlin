@@ -69,6 +69,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/generar_crash"/>
+
+            <Button
+                android:id="@+id/botonEnviarInvitacion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/enviar_invitacion"/>
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
