@@ -73,4 +73,5 @@
     <string name="generar_crash">Generar un Crash</string>
     <string name="compartir">Compartir</string>
     <string name="enviar_invitacion">Enviar Invitación</string>
+    <string name="mostrar_anuncio_intersticial">Mostrar Anuncio Intersticial</string>
 </resources>
