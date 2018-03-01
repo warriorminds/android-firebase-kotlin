@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:padding="@dimen/padding_normal"
     tools:context="com.warriorminds.firebasekotlin.ActividadPrincipal">
 
     <ScrollView
+        android:id="@+id/svBotones"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_above="@+id/banner">
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
             <Button
                 android:id="@+id/botonAutenticarCorreo"
                 android:layout_width="match_parent"
@@ -76,6 +78,29 @@
                 android:layout_height="wrap_content"
                 android:text="@string/enviar_invitacion"/>
 
+            <Button
+                android:id="@+id/botonAnuncioIntersticial"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/mostrar_anuncio_intersticial"/>
+
+            <Button
+                android:id="@+id/botonVideo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/mostrar_video_anuncio"/>
         </LinearLayout>
     </ScrollView>
-</LinearLayout>
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/banner"
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        ads:adSize="BANNER"
+        ads:adUnitId="ca-app-pub-3940256099942544/6300978111">
+    </com.google.android.gms.ads.AdView>
+
+</RelativeLayout>
